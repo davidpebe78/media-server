@@ -7,9 +7,9 @@ services:
     container_name: transmission
     env_file: .env
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Bogota
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
       - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
       - USER=${TRANSMISSION_USER} #optional
       - PASS=${TRANSMISSION_PASS} #optional
@@ -27,9 +27,9 @@ services:
     image: linuxserver/plex
     env_file: .env
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=TZ=America/Bogota
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
       - PLEX_CLAIM=claim-1_S4gsSwXE2QqLnYtCrP
       - VERSION=docker
     volumes:
@@ -39,3 +39,30 @@ services:
       - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/media/Series:/series
     network_mode: host
     restart: unless-stopped
+  jackett:
+    image: lscr.io/linuxserver/jackett
+    container_name: jackett
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - AUTO_UPDATE=true #optional
+    volumes:
+      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/Docker/jacket/config:/config
+      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/Docker/jacket/download:/downloads
+    ports:
+      - 9117:9117
+    restart: unless-stopped
+  sonarr:
+    image: linuxserver/sonarr:preview
+    container_name: sonarr
+    restart: unless-stopped
+    ports:
+      - 8989:8989
+    volumes:
+      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/Docker/sonarr/config:/config
+      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/Docker/transmission/Downloads:/downloads
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
