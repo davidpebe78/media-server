@@ -1,0 +1,41 @@
+version: '3' 
+
+services: 
+
+  transmission:
+    image: lscr.io/linuxserver/transmission
+    container_name: transmission
+    env_file: .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Bogota
+      - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
+      - USER=${TRANSMISSION_USER} #optional
+      - PASS=${TRANSMISSION_PASS} #optional
+      #- WHITELIST=iplist #optional
+      #- HOST_WHITELIST=dnsnane list #optional
+    volumes:
+      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/Docker/transmission/Downloads:/downloads
+      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/Docker/transmission/config:/config
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped
+  plex:
+    image: linuxserver/plex
+    env_file: .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=TZ=America/Bogota
+      - PLEX_CLAIM=claim-1_S4gsSwXE2QqLnYtCrP
+      - VERSION=docker
+    volumes:
+      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/Docker/plex/config:/config
+      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/media/Peliculas:/peliculas
+      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/media/Musica:/musica
+      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/media/Series:/series
+    network_mode: host
+    restart: unless-stopped
