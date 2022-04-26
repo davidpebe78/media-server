@@ -1,3 +1,3 @@
 # media-server
  
- git clone https://
+ git clone https://github.com/davidpebe78/media-server.git
