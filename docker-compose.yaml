@@ -16,8 +16,8 @@ services:
       #- WHITELIST=iplist #optional
       #- HOST_WHITELIST=dnsnane list #optional
     volumes:
-      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/Docker/transmission/Downloads:/downloads
-      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/Docker/transmission/config:/config
+      - ./MediaServer/transmission/Downloads:/downloads
+      - ./MediaServer/transmission/config:/config
     ports:
       - 9091:9091
       - 51413:51413
@@ -30,13 +30,13 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
-      - PLEX_CLAIM=claim-1_S4gsSwXE2QqLnYtCrP
+      - PLEX_CLAIM=${PLEX_CLAIM}
       - VERSION=docker
     volumes:
-      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/Docker/plex/config:/config
-      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/media/Peliculas:/peliculas
-      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/media/Musica:/musica
-      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/media/Series:/series
+      - ./MediaServer/plex/config:/config
+      - ./MediaServer/plex/Peliculas:/peliculas
+      - ./MediaServer/plex/Musica:/musica
+      - ./MediaServer/plex/Series:/series
     network_mode: host
     restart: unless-stopped
   jackett:
@@ -48,8 +48,8 @@ services:
       - TZ=${TZ}
       - AUTO_UPDATE=true #optional
     volumes:
-      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/Docker/jacket/config:/config
-      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/Docker/jacket/download:/downloads
+      - ./MediaServer/jacket/config:/config
+      - ./MediaServer/jacket/download:/downloads
     ports:
       - 9117:9117
     restart: unless-stopped
@@ -60,8 +60,8 @@ services:
     ports:
       - 8989:8989
     volumes:
-      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/Docker/sonarr/config:/config
-      - /srv/dev-disk-by-uuid-90018b64-5e78-493f-8526-b6439e6633c7/Docker/transmission/Downloads:/downloads
+      - ./MediaServer/sonarr/config:/config
+      - ./MediaServer/transmission/Downloads:/downloads
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
