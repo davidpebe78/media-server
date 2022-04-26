@@ -28,8 +28,8 @@ Confirmamos la versión más reciente disponible en su página de versiones.
 
 Y si tenemos Docker y Docker-compose instalamos, clonamos el repositorio
     
-    git clone https://github.com/davidpebe78/media-server.git
+        git clone https://github.com/davidpebe78/media-server.git
 
 Y ejecutamos:
 
-    docker-compose up -d
+        docker-compose up -d
