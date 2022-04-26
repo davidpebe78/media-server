@@ -1,5 +1,6 @@
 # media-server
 Si no tenemos instalado Docker, preparamos el sistema y lo instalamos.
+
     Actualización del sistema:
 
         apt update
