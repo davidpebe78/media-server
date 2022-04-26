@@ -1,27 +1,28 @@
 # media-server
 Si no tenemos instalado Docker, preparamos el sistema y lo instalamos.
 
-    Actualización del sistema:
+Actualización del sistema:
 
         apt update
         apt upgrade
 
-    Instalamos dependencias:
+Instalamos dependencias:
 
         sudo apt install apt-transport-https ca-certificates curl software-properties-common
 
-    Instalación de Docker:
+Instalación de Docker:
 
         curl -fsSL https://get.docker.com -o get-docker.sh
+
         sh get-docker.sh
 
         sudo usermod -aG docker $USER
 
-    Instalación de Docker Compose:
+Instalación de Docker Compose:
 
         sudo curl -L "https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     
-    Confirmamos la versión más reciente disponible en su página de versiones.
+Confirmamos la versión más reciente disponible en su página de versiones.
 
         https://github.com/docker/compose/releases
 
