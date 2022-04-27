@@ -42,6 +42,7 @@ services:
   jackett:
     image: lscr.io/linuxserver/jackett
     container_name: jackett
+    env_file: .env
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -62,6 +63,7 @@ services:
     volumes:
       - ./MediaServer/sonarr/config:/config
       - ./MediaServer/transmission/Downloads:/downloads
+    env_file: .env
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
