@@ -32,8 +32,16 @@ Y si tenemos Docker y Docker-compose instalamos, clonamos el repositorio
     
         $ git clone https://github.com/davidpebe78/media-server.git
 
-Y ejecutamos:
+Cambiamos de directorio:
 
         $ cd media-server
 
+Edita el archivo .env, con las variables que necesites para el funcionamiento de los contenedores:
+
+        $ nano .env
+
+Y ejecutamos:
+
         $ docker-compose up -d
+
+
