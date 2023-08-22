@@ -16,8 +16,8 @@ services:
       #- WHITELIST=iplist #optional
       #- HOST_WHITELIST=dnsnane list #optional
     volumes:
-      - ./MediaServer/transmission/Downloads:/downloads
-      - ./MediaServer/transmission/config:/config
+      - /HDD/docker/media-server/MediaServer/transmission/Downloads:/downloads
+      - /HDD/docker/media-server/MediaServer/transmission/config:/config
     ports:
       - 9091:9091
       - 51413:51413
@@ -33,10 +33,10 @@ services:
       - PLEX_CLAIM=${PLEX_CLAIM}
       - VERSION=docker
     volumes:
-      - ./MediaServer/plex/config:/config
-      - ./MediaServer/plex/Peliculas:/peliculas
-      - ./MediaServer/plex/Musica:/musica
-      - ./MediaServer/plex/Series:/series
+      - /HDD/docker/media-server/MediaServer/plex/config:/config
+      - /HDD/docker/media-server/MediaServer/plex/Peliculas:/peliculas
+      - /HDD/docker/media-server/MediaServer/plex/Musica:/musica
+      - /HDD/docker/media-server/MediaServer/plex/Series:/series
     network_mode: host
     restart: unless-stopped
   jackett:
@@ -49,8 +49,8 @@ services:
       - TZ=${TZ}
       - AUTO_UPDATE=true #optional
     volumes:
-      - ./MediaServer/jacket/config:/config
-      - ./MediaServer/jacket/download:/downloads
+      - /HDD/docker/media-server/MediaServer/jacket/config:/config
+      - /HDD/docker/media-server/MediaServer/jacket/download:/downloads
     ports:
       - 9117:9117
     restart: unless-stopped
@@ -61,8 +61,8 @@ services:
     ports:
       - 8989:8989
     volumes:
-      - ./MediaServer/sonarr/config:/config
-      - ./MediaServer/transmission/Downloads:/downloads
+      - /HDD/docker/media-server/MediaServer/sonarr/config:/config
+      - /HDD/docker/media-server/MediaServer/transmission/Downloads:/downloads
     env_file: .env
     environment:
       - PUID=${PUID}
